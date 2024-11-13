@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.java_project.measurements.measurementsformController">
+   <children>
+      <ImageView fx:id="MSRlogo" fitHeight="82.0" fitWidth="112.0" layoutX="31.0" layoutY="47.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../../../../Downloads/a033a6d215cfdc41dbfd92c5ac5dc8cf.jpg" />
+         </image>
+      </ImageView>
+      <Button layoutX="495.0" layoutY="82.0" mnemonicParsing="false" onAction="#MSRbtnnnew" text="New" />
+      <Button layoutX="495.0" layoutY="183.0" mnemonicParsing="false" onAction="#MSRbtnnclose" text="Close" />
+      <Button layoutX="495.0" layoutY="149.0" mnemonicParsing="false" onAction="#MSRbtnnupdate" text="Update" />
+      <Button layoutX="495.0" layoutY="117.0" mnemonicParsing="false" onAction="#MSRbtnsave" text="Save" />
+      <TextField fx:id="MSRmobile" layoutX="182.0" layoutY="82.0" />
+      <ComboBox fx:id="MSRdress" layoutX="52.0" layoutY="161.0" prefWidth="150.0" />
+      <TextField fx:id="MSRquantity" layoutX="52.0" layoutY="288.0" />
+      <TextField fx:id="MSRprice" layoutX="224.0" layoutY="288.0" />
+      <TextField fx:id="MSRbill" layoutX="399.0" layoutY="288.0" />
+      <TextArea fx:id="MSRmeasurements" layoutX="50.0" layoutY="352.0" prefHeight="127.0" prefWidth="500.0" />
+      <Label layoutX="244.0" layoutY="21.0" text="Measurements">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <Label layoutX="182.0" layoutY="56.0" text="Mobile" />
+      <Label layoutX="52.0" layoutY="134.0" text="Dress" />
+      <ImageView fx:id="MSRdesign" fitHeight="94.0" fitWidth="112.0" layoutX="275.0" layoutY="136.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../../../../Downloads/a033a6d215cfdc41dbfd92c5ac5dc8cf.jpg" />
+         </image>
+      </ImageView>
+      <Button layoutX="305.0" layoutY="224.0" mnemonicParsing="false" onAction="#MSRbtnupload" text="Upload" />
+      <DatePicker fx:id="MSRdob" layoutX="56.0" layoutY="224.0" />
+      <Label layoutX="56.0" layoutY="197.0" text="Date of Delivery" />
+      <Label layoutX="52.0" layoutY="267.0" text="Quantity" />
+      <Label layoutX="226.0" layoutY="267.0" text="Price Per Unit" />
+      <Label layoutX="399.0" layoutY="267.0" text="Bill" />
+      <Label layoutX="52.0" layoutY="326.0" text="Measurements" />
+      <ComboBox fx:id="MSRworkers" layoutX="52.0" layoutY="521.0" prefWidth="150.0" />
+      <Label layoutX="52.0" layoutY="495.0" text="Workers" />
+      <Label layoutX="275.0" layoutY="114.0" text="Design" />
+   </children>
+</AnchorPane>

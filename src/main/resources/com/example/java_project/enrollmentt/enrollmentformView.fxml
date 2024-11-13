@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="500.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.java_project.enrollment.enrollmentformController">
+   <children>
+      <ComboBox fx:id="enrGender" layoutX="75.0" layoutY="325.0" prefWidth="150.0" />
+      <DatePicker fx:id="enrDob" layoutX="275.0" layoutY="325.0" />
+      <TextField fx:id="txtenrMob" layoutX="75.0" layoutY="180.0" />
+      <TextField fx:id="txtenrAddress" layoutX="75.0" layoutY="250.0" />
+      <TextField fx:id="txtenrName" layoutX="75.0" layoutY="106.0" />
+      <TextField fx:id="txtenrCity" layoutX="275.0" layoutY="250.0" prefHeight="25.0" prefWidth="149.0" />
+      <Button fx:id="btnFetch" layoutX="265.0" layoutY="106.0" mnemonicParsing="false" onAction="#doFetch" text="Fetch" />
+      <Button fx:id="btnEnroll" layoutX="113.0" layoutY="411.0" mnemonicParsing="false" onAction="#CEdoEnroll" text="Enroll Now" />
+      <Button fx:id="btnenrEdit" layoutX="217.0" layoutY="411.0" mnemonicParsing="false" onAction="#CEdoEdit" text="Edit Data" />
+      <Button fx:id="btnenrClear" layoutX="310.0" layoutY="411.0" mnemonicParsing="false" onAction="#CEdoClear" text="Clear All" />
+      <Label layoutX="184.0" layoutY="14.0" prefHeight="36.0" prefWidth="132.0" text="Customer Enrollment">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="75.0" layoutY="77.0" text="Name" />
+      <Label layoutX="75.0" layoutY="152.0" text="Mobile Number" />
+      <Label layoutX="75.0" layoutY="223.0" text="Address" />
+      <Label layoutX="75.0" layoutY="295.0" text="Gender" />
+      <Label layoutX="277.0" layoutY="223.0" text="City" />
+      <Label layoutX="277.0" layoutY="295.0" text="DOB" />
+   </children>
+</AnchorPane>
