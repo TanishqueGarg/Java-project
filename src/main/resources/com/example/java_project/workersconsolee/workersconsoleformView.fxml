@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.java_project.workersconsole.workersconsoleformController">
+<AnchorPane prefHeight="500.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.java_project.workersconsole.workersconsoleformController" style="-fx-background-color: linear-gradient(to bottom, #4facfe, #00f2fe);">
     <children>
         <TextField fx:id="WCname" layoutX="42.0" layoutY="76.0" />
         <TextField fx:id="WCaddress" layoutX="42.0" layoutY="131.0" />

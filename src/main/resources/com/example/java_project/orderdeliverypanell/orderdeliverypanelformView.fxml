@@ -17,8 +17,8 @@
         </Label>
         <TextField fx:id="ODPtxtmobile" layoutX="151.0" layoutY="59.0" promptText="10 Digits" />
         <Label layoutX="82.0" layoutY="63.0" text="Mobile No." />
-        <Button fx:id="ODPbtndofindorders" layoutX="339.0" layoutY="59.0" mnemonicParsing="false" text="Find Orders" />
-        <ListView fx:id="ODPstatuslist" layoutX="31.0" layoutY="147.0" prefHeight="200.0" prefWidth="43.0" />
+        <Button fx:id="ODPbtndofindorders" onAction="#doFindOrders" layoutX="339.0" layoutY="59.0" mnemonicParsing="false" text="Find Orders" />
+        <ListView fx:id="ODPstatuslist" layoutX="31.0" layoutY="147.0" prefHeight="200.0" prefWidth="50.0" />
         <ListView fx:id="ODPorderidlist" layoutX="100.0" layoutY="147.0" prefHeight="200.0" prefWidth="107.0" />
         <ListView fx:id="ODPbilllist" layoutX="230.0" layoutY="147.0" prefHeight="200.0" prefWidth="138.0" />
         <ListView fx:id="ODPitemlist" layoutX="391.0" layoutY="147.0" prefHeight="200.0" prefWidth="182.0" />
@@ -28,6 +28,6 @@
         <Label layoutX="470.0" layoutY="122.0" text="Item" />
         <Label layoutX="195.0" layoutY="365.0" text="Total Bill: " />
         <TextField fx:id="ODPtotalbill" layoutX="265.0" layoutY="361.0" prefHeight="26.0" prefWidth="114.0" />
-        <Button fx:id="ODPbtndeliveredall" layoutX="257.0" layoutY="410.0" mnemonicParsing="false" text="Delivered All" />
+        <Button fx:id="ODPbtndeliveredall" onAction="#doDeliveredAll" layoutX="257.0" layoutY="410.0" mnemonicParsing="false" text="Delivered All" />
     </children>
 </AnchorPane>

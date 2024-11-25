@@ -7,38 +7,59 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="450.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.java_project.getreadyproducts.getreadyproductsformController">
+<AnchorPane prefHeight="450.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.java_project.getreadyproducts.getreadyproductsformController" style="-fx-background-color: linear-gradient(to bottom, #4facfe, #00f2fe); -fx-font-family: 'Arial', sans-serif;">
     <children>
-        <ComboBox fx:id="GRPcomboworkers" layoutX="55.0" layoutY="79.0" prefWidth="150.0" promptText="--Select--" />
-        <Label layoutX="225.0" layoutY="21.0" prefHeight="26.0" prefWidth="150.0" text="Get Ready Products">
+        <!-- Worker Name ComboBox -->
+        <ComboBox fx:id="GRPcomboworkers" layoutX="55.0" layoutY="79.0" prefWidth="150.0" promptText="--Select--" style="-fx-background-color: white; -fx-text-fill: black;" />
+
+        <!-- Title Label -->
+        <Label layoutX="225.0" layoutY="21.0" prefHeight="26.0" prefWidth="150.0" text="Get Ready Products" style="-fx-text-fill: white;">
             <font>
                 <Font size="15.0" />
             </font>
         </Label>
-        <Label layoutX="55.0" layoutY="47.0" prefHeight="26.0" prefWidth="150.0" text="Worker Name">
+
+        <!-- Worker Name Label -->
+        <Label layoutX="55.0" layoutY="47.0" prefHeight="26.0" prefWidth="150.0" text="Worker Name" style="-fx-text-fill: white;">
             <font>
                 <Font size="13.0" />
             </font>
         </Label>
-        <ListView fx:id="GRPlistorders" layoutX="30.0" layoutY="160.0" prefHeight="200.0" prefWidth="144.0" />
-        <ListView fx:id="GRPlistproducts" layoutX="212.0" layoutY="160.0" prefHeight="200.0" prefWidth="164.0" />
-        <ListView fx:id="GRPlistdod" layoutX="411.0" layoutY="160.0" prefHeight="200.0" prefWidth="150.0" />
-        <Label layoutX="41.0" layoutY="123.0" prefHeight="26.0" prefWidth="150.0" text="Order ID">
+
+        <!-- ListView for Orders -->
+        <ListView fx:id="GRPlistorders" layoutX="30.0" layoutY="160.0" prefHeight="200.0" prefWidth="144.0" style="-fx-background-color: white;" />
+
+        <!-- ListView for Products -->
+        <ListView fx:id="GRPlistproducts" layoutX="212.0" layoutY="160.0" prefHeight="200.0" prefWidth="164.0" style="-fx-background-color: white;" />
+
+        <!-- ListView for Date of Delivery -->
+        <ListView fx:id="GRPlistdod" layoutX="411.0" layoutY="160.0" prefHeight="200.0" prefWidth="150.0" style="-fx-background-color: white;" />
+
+        <!-- Order ID Label -->
+        <Label layoutX="41.0" layoutY="123.0" prefHeight="26.0" prefWidth="150.0" text="Order ID" style="-fx-text-fill: white;">
             <font>
                 <Font size="13.0" />
             </font>
         </Label>
-        <Label layoutX="212.0" layoutY="123.0" prefHeight="26.0" prefWidth="150.0" text="Product">
+
+        <!-- Product Label -->
+        <Label layoutX="212.0" layoutY="123.0" prefHeight="26.0" prefWidth="150.0" text="Product" style="-fx-text-fill: white;">
             <font>
                 <Font size="13.0" />
             </font>
         </Label>
-        <Label layoutX="411.0" layoutY="123.0" prefHeight="26.0" prefWidth="150.0" text="Date of Delivery">
+
+        <!-- Date of Delivery Label -->
+        <Label layoutX="411.0" layoutY="123.0" prefHeight="26.0" prefWidth="150.0" text="Date of Delivery" style="-fx-text-fill: white;">
             <font>
                 <Font size="13.0" />
             </font>
         </Label>
-        <Button fx:id="GRPbtnrecieved" layoutX="254.0" layoutY="398.0" mnemonicParsing="false" onAction="#doRecieveAll" text="Recieved All" />
-        <Button fx:id="GRPbtnsearch" layoutX="254.0" layoutY="79.0" mnemonicParsing="false" onAction="#doSearch" text="Search" />
+
+        <!-- Received All Button -->
+        <Button fx:id="GRPbtnrecieved" layoutX="254.0" layoutY="398.0" mnemonicParsing="false" onAction="#doRecieveAll" text="Recieved All" style="-fx-background-color: #0066cc; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10 20; -fx-border-radius: 5; -fx-background-radius: 5;" />
+
+        <!-- Search Button -->
+        <Button fx:id="GRPbtnsearch" layoutX="254.0" layoutY="79.0" mnemonicParsing="false" onAction="#doSearch" text="Search" style="-fx-background-color: #0066cc; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10 20; -fx-border-radius: 5; -fx-background-radius: 5;" />
     </children>
 </AnchorPane>

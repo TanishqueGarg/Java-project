@@ -7,13 +7,13 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.java_project.measurementsexplorer.measurementsexplorerController">
    <children>
       <ComboBox fx:id="MEorderstatus" layoutX="22.0" layoutY="59.0" prefHeight="25.0" prefWidth="123.0" />
       <ComboBox fx:id="MEworkers" layoutX="176.0" layoutY="59.0" prefHeight="25.0" prefWidth="123.0" />
       <TextField fx:id="MEcustomermob" layoutX="333.0" layoutY="59.0" prefHeight="25.0" prefWidth="133.0" />
-      <Button fx:id="MEbtnFetch" layoutX="496.0" layoutY="59.0" mnemonicParsing="false" onAction="#MEdoFetch" text="Fetch Now" />
+      <Button fx:id="MEbtnFetch" layoutX="476.0" layoutY="59.0" mnemonicParsing="false" onAction="#MEdoFetch" text="Fetch" />
+      <Button fx:id="MEbtnClear" layoutX="535.0" layoutY="59.0" mnemonicParsing="false" onAction="#MEdoClear" text="Clear" />
       <Label layoutX="22.0" layoutY="34.0" text="Order Status" />
       <Label layoutX="176.0" layoutY="34.0" text="Workers" />
       <Label layoutX="333.0" layoutY="34.0" text="Customer Mobile" />

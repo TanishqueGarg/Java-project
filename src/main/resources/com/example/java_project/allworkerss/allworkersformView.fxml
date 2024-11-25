@@ -5,13 +5,28 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.java_project.allworker.allworkersformControlller">
+<AnchorPane prefHeight="450.0" prefWidth="600.0" style="-fx-background-color: #f0f4f8;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.java_project.allworker.allworkersformControlller">
    <children>
-      <Label layoutX="36.0" layoutY="61.0" text="Specializations" />
-      <ComboBox fx:id="AWsplzcombo" layoutX="131.0" layoutY="57.0" prefWidth="150.0" />
-      <Button fx:id="AWbtnallworkers" layoutX="369.0" layoutY="57.0" mnemonicParsing="false" onAction="#AWshowWorkers" text="All Workers" />
-      <TableView fx:id="AWtblallworkers" layoutX="25.0" layoutY="110.0" prefHeight="259.0" prefWidth="545.0" />
+      <VBox alignment="TOP_CENTER" layoutX="20.0" layoutY="20.0" prefHeight="410.0" prefWidth="560.0" spacing="15.0">
+         <!-- Title -->
+         <Label text="Worker Management" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;" />
+
+         <!-- Filter Row -->
+         <HBox alignment="CENTER_LEFT" spacing="10.0">
+            <Label text="Specializations:" style="-fx-font-size: 14px; -fx-text-fill: #34495e;" />
+            <ComboBox fx:id="AWsplzcombo" prefWidth="200.0" style="-fx-background-color: white; -fx-border-color: #bdc3c7;" />
+            <Button fx:id="AWbtnallworkers" mnemonicParsing="false" onAction="#AWshowWorkers" text="All Workers"
+                    style="-fx-font-size: 12px; -fx-padding: 5px 10px; -fx-background-color: #3498db; -fx-text-fill: white; -fx-border-radius: 5; -fx-background-radius: 5;" />
+            <Button fx:id="AWbtnSearchWorkers" mnemonicParsing="false" onAction="#AWshowSpecificWorkers" text="Search Workers"
+                    style="-fx-font-size: 12px; -fx-padding: 5px 10px; -fx-background-color: #2ecc71; -fx-text-fill: white; -fx-border-radius: 5; -fx-background-radius: 5;" />
+         </HBox>
+
+         <!-- Table -->
+         <TableView fx:id="AWtblallworkers" prefHeight="320.0" prefWidth="540.0"
+                    style="-fx-border-color: #7f8c8d; -fx-border-width: 1; -fx-background-color: #ecf0f1;" />
+      </VBox>
    </children>
 </AnchorPane>
