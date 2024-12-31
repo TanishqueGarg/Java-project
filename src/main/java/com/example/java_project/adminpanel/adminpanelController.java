@@ -1,18 +1,25 @@
 package com.example.java_project.adminpanel;
 
-import java.io.IOException;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.layout.VBox;
+import javafx.scene.control.ButtonType;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+
+import java.io.IOException;
+import java.util.Optional;
 
 public class adminpanelController {
 
     @FXML
-    private VBox rootLayout;
+    private AnchorPane rootLayout; // Updated to AnchorPane to match the FXML root element
 
     @FXML
     private Button costumerEnrollmentButton;
@@ -24,6 +31,9 @@ public class adminpanelController {
     private Button measurementExplorerButton;
 
     @FXML
+    private Button settingsButton;
+
+    @FXML
     private Button workerConsoleButton;
 
     @FXML
@@ -33,54 +43,68 @@ public class adminpanelController {
     private Button readyProductsButton;
 
     @FXML
+    private Button btnLogout;
+
+    @FXML
     private Button orderDeliveryButton;
 
     @FXML
-    void initialize() {
-        // Root layout styles
-        rootLayout.setStyle("-fx-background-color: linear-gradient(to bottom, #4facfe, #00f2fe);"
-                + "-fx-font-family: 'Arial', sans-serif;");
+    void btnLogout(ActionEvent event) {
+        // Create a confirmation alert
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Logout Confirmation");
+        alert.setHeaderText("Are you sure you want to logout?");
+        alert.setContentText("Click 'Yes' to logout or 'No' to stay.");
 
-        // Common button style
-        String buttonStyle = "-fx-background-color: #0066cc; -fx-text-fill: white; -fx-font-size: 14px; "
-                + "-fx-padding: 10 20; -fx-border-radius: 5; -fx-background-radius: 5;";
+        // Show the alert and wait for a response
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            try {
+                // Load the login view FXML
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/java_project/loginpanell/loginView.fxml"));
+                Parent loginView = loader.load();
 
-        // Apply styles to buttons
-        costumerEnrollmentButton.setStyle(buttonStyle);
-        measurementsButton.setStyle(buttonStyle);
-        measurementExplorerButton.setStyle(buttonStyle);
-        workerConsoleButton.setStyle(buttonStyle);
-        workerListButton.setStyle(buttonStyle);
-        readyProductsButton.setStyle(buttonStyle);
-        orderDeliveryButton.setStyle(buttonStyle);
+                // Create a new scene for the login view
+                Scene loginScene = new Scene(loginView);
 
-        // Button actions with specific page titles
-        costumerEnrollmentButton.setOnAction(event -> openNewScene(
-                "/com/example/java_project/enrollmentt/enrollmentformView.fxml", "Customer Enrollment"));
-        measurementsButton.setOnAction(event -> openNewScene(
-                "/com/example/java_project/measurementss/measurementsformView.fxml", "Measurements"));
-        measurementExplorerButton.setOnAction(event -> openNewScene(
-                "/com/example/java_project/measurementsexplorerr/measurementsexplorerView.fxml", "Measurement Explorer"));
-        workerConsoleButton.setOnAction(event -> openNewScene(
-                "/com/example/java_project/workersconsolee/workersconsoleformView.fxml", "Worker Console"));
-        workerListButton.setOnAction(event -> openNewScene(
-                "/com/example/java_project/allworkerss/allworkersformView.fxml", "Worker List"));
-        readyProductsButton.setOnAction(event -> openNewScene(
-                "/com/example/java_project/getreadyproductss/getreadyproductsformView.fxml", "Ready Products"));
-        orderDeliveryButton.setOnAction(event -> openNewScene(
-                "/com/example/java_project/orderdeliverypanell/orderdeliverypanelformView.fxml", "Order Delivery"));
+                // Get the current stage (admin panel) and close it
+                Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                currentStage.close();
+
+                // Create a new stage for the login view and show it
+                Stage loginStage = new Stage();
+                loginStage.setTitle("Login");
+                loginStage.setScene(loginScene);
+                loginStage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            alert.close(); // Close the alert if "No" is clicked
+        }
     }
 
-    private void openNewScene(String fxmlFilePath, String title) {
+    @FXML
+    void initialize() {
+        costumerEnrollmentButton.setOnAction(event -> loadScene("/com/example/java_project/enrollmentt/enrollmentformView.fxml"));
+        measurementsButton.setOnAction(event -> loadScene("/com/example/java_project/measurementss/measurementsformView.fxml"));
+        measurementExplorerButton.setOnAction(event -> loadScene("/com/example/java_project/measurementsexplorerr/measurementsexplorerView.fxml"));
+        workerConsoleButton.setOnAction(event -> loadScene("/com/example/java_project/workersconsolee/workersconsoleformView.fxml"));
+        workerListButton.setOnAction(event -> loadScene("/com/example/java_project/allworkerss/allworkersformView.fxml"));
+        readyProductsButton.setOnAction(event -> loadScene("/com/example/java_project/getreadyproductss/getreadyproductsformView.fxml"));
+        orderDeliveryButton.setOnAction(event -> loadScene("/com/example/java_project/orderdeliverypanell/orderdeliverypanelformView.fxml"));
+        settingsButton.setOnAction(event -> loadScene("/com/example/java_project/settingsPanel/settingsView.fxml"));
+    }
+
+    private void loadScene(String fxmlFilePath) {
         try {
             // Load the new FXML file
-            Parent newScene = FXMLLoader.load(getClass().getResource(fxmlFilePath));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFilePath));
+            Pane newContent = loader.load();
 
-            // Create and configure the new stage
-            Stage newStage = new Stage();
-            newStage.setScene(new Scene(newScene));
-            newStage.setTitle(title); // Set the provided title
-            newStage.show();
+            // Replace the current root layout content with the new content
+            rootLayout.getChildren().clear(); // Clear existing children
+            rootLayout.getChildren().add(newContent); // Add new content
         } catch (IOException e) {
             e.printStackTrace();
         }

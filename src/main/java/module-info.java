@@ -35,5 +35,10 @@ module com.example.java_project {
     opens com.example.java_project.orderdeliverypanel to javafx.fxml;
     exports com.example.java_project.orderdeliverypanel;
 
+    opens com.example.java_project.loginpanel to javafx.fxml;
+    exports com.example.java_project.loginpanel;
+
+    opens com.example.java_project.settingsPanell to javafx.fxml;
+    exports com.example.java_project.settingsPanell;
 
 }

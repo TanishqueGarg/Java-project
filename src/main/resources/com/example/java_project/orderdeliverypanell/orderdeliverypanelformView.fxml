@@ -4,30 +4,32 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="450.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.java_project.orderdeliverypanel.orderdeliverypanelformController">
-    <children>
-        <Label layoutX="209.0" layoutY="14.0" text="Order Delivery Panel">
-            <font>
-                <Font size="20.0" />
-            </font>
-        </Label>
-        <TextField fx:id="ODPtxtmobile" layoutX="151.0" layoutY="59.0" promptText="10 Digits" />
-        <Label layoutX="82.0" layoutY="63.0" text="Mobile No." />
-        <Button fx:id="ODPbtndofindorders" onAction="#doFindOrders" layoutX="339.0" layoutY="59.0" mnemonicParsing="false" text="Find Orders" />
-        <ListView fx:id="ODPstatuslist" layoutX="31.0" layoutY="147.0" prefHeight="200.0" prefWidth="50.0" />
-        <ListView fx:id="ODPorderidlist" layoutX="100.0" layoutY="147.0" prefHeight="200.0" prefWidth="107.0" />
-        <ListView fx:id="ODPbilllist" layoutX="230.0" layoutY="147.0" prefHeight="200.0" prefWidth="138.0" />
-        <ListView fx:id="ODPitemlist" layoutX="391.0" layoutY="147.0" prefHeight="200.0" prefWidth="182.0" />
-        <Label layoutX="36.0" layoutY="122.0" text="Status" />
-        <Label layoutX="130.0" layoutY="122.0" text="Order ID" />
-        <Label layoutX="291.0" layoutY="122.0" text="Bill" />
-        <Label layoutX="470.0" layoutY="122.0" text="Item" />
-        <Label layoutX="195.0" layoutY="365.0" text="Total Bill: " />
-        <TextField fx:id="ODPtotalbill" layoutX="265.0" layoutY="361.0" prefHeight="26.0" prefWidth="114.0" />
-        <Button fx:id="ODPbtndeliveredall" onAction="#doDeliveredAll" layoutX="257.0" layoutY="410.0" mnemonicParsing="false" text="Delivered All" />
-    </children>
+<AnchorPane fx:controller="com.example.java_project.orderdeliverypanel.orderdeliverypanelformController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fitHeight="600.0" fitWidth="600.0">
+         <image>
+            <Image url="@../../../../images/new_background.jpg" />
+         </image>
+      </ImageView>
+      <Button fx:id="btnBack" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#doBack" style="-fx-background-color: black; -fx-text-fill: white; -fx-font-size: 14px; -fx-border-radius: 5; -fx-background-radius: 5;" text="←" />
+      <Label layoutX="149.0" layoutY="43.0" style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: white; -fx-effect: dropshadow(gaussian, black, 2, 0.7, 1, 1);" text="ORDER DELIVERY PANEL" />
+      <TextField fx:id="ODPtxtmobile" layoutX="154.0" layoutY="124.0" promptText="10 Digits" />
+      <Label layoutX="85.0" layoutY="128.0" style="-fx-text-fill: white;" text="Mobile No." />
+      <Button fx:id="ODPbtndofindorders" layoutX="342.0" layoutY="124.0" mnemonicParsing="false" onAction="#doFindOrders" style="-fx-background-color: black; -fx-text-fill: white;" text="Find Orders" />
+      <ListView fx:id="ODPstatuslist" layoutX="34.0" layoutY="208.0" prefHeight="200.0" prefWidth="50.0" />
+      <ListView fx:id="ODPorderidlist" layoutX="103.0" layoutY="208.0" prefHeight="200.0" prefWidth="107.0" />
+      <ListView fx:id="ODPbilllist" layoutX="233.0" layoutY="208.0" prefHeight="200.0" prefWidth="138.0" />
+      <ListView fx:id="ODPitemlist" layoutX="394.0" layoutY="208.0" prefHeight="200.0" prefWidth="182.0" />
+      <Label layoutX="39.0" layoutY="183.0" style="-fx-text-fill: white;" text="Status" />
+      <Label layoutX="133.0" layoutY="183.0" style="-fx-text-fill: white;" text="Order ID" />
+      <Label layoutX="294.0" layoutY="183.0" style="-fx-text-fill: white;" text="Bill" />
+      <Label layoutX="473.0" layoutY="183.0" style="-fx-text-fill: white;" text="Item" />
+      <Label layoutX="198.0" layoutY="433.0" style="-fx-text-fill: white;" text="Total Bill: " />
+      <TextField fx:id="ODPtotalbill" layoutX="268.0" layoutY="429.0" prefHeight="26.0" prefWidth="114.0" />
+      <Button fx:id="ODPbtndeliveredall" layoutX="260.0" layoutY="479.0" mnemonicParsing="false" onAction="#doDeliveredAll" style="-fx-background-color: black; -fx-text-fill: white;" text="Delivered All" />
+   </children>
 </AnchorPane>

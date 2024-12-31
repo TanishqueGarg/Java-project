@@ -9,7 +9,11 @@ import java.util.ResourceBundle;
 import com.example.java_project.DatabaseConnection;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 
 public class enrollmentformController {
 
@@ -19,6 +23,28 @@ public class enrollmentformController {
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
+    }
+
+    @FXML
+    private Button btnBack;
+
+    @FXML
+    void doBack(ActionEvent event) {
+        try {
+            // Load the admin panel FXML file
+            Parent adminPanel = FXMLLoader.load(getClass().getResource("/com/example/java_project/adminpanell/adminpanelView.fxml"));
+
+            // Get the current stage
+            Stage currentStage = (Stage) btnBack.getScene().getWindow();
+
+            // Set the admin panel scene
+            currentStage.setScene(new Scene(adminPanel));
+            currentStage.setTitle("Darjee");
+            currentStage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Error", "Unable to load the Admin Panel.");
+        }
     }
 
     @FXML
@@ -55,10 +81,8 @@ public class enrollmentformController {
         System.out.println("Fields Cleared");
     }
 
-//    @FXML
     @FXML
     void CEdoEdit(ActionEvent event) {
-        // Get values from the form fields
         String name = txtenrName.getText();
         String mobile = txtenrMob.getText();
         String address = txtenrAddress.getText();
@@ -66,14 +90,12 @@ public class enrollmentformController {
         String gender = enrGender.getSelectionModel().getSelectedItem();
         LocalDate dob = enrDob.getValue();
 
-        // Check if the required fields are filled
         if (name.isEmpty() || mobile.isEmpty() || address.isEmpty() || city.isEmpty() || gender == null || dob == null) {
             showAlert(Alert.AlertType.ERROR, "Input Error", "All fields must be filled to update the record.");
             return;
         }
 
         try {
-            // Prepare SQL query to update the record based on the fetched name
             stmt = con.prepareStatement("UPDATE enrollmenttbl SET mobile = ?, address = ?, city = ?, gender = ?, dob = ? WHERE cname = ?");
             stmt.setString(1, mobile);
             stmt.setString(2, address);
@@ -96,12 +118,9 @@ public class enrollmentformController {
         }
     }
 
-
-//    @FXML
     @FXML
     void CEdoEnroll(ActionEvent event) {
         try {
-            // Check if user with the same name or mobile already exists
             String checkQuery = "SELECT * FROM enrollmenttbl WHERE cname = ? OR mobile = ?";
             PreparedStatement checkStmt = con.prepareStatement(checkQuery);
             checkStmt.setString(1, txtenrName.getText());
@@ -109,7 +128,6 @@ public class enrollmentformController {
             var resultSet = checkStmt.executeQuery();
 
             if (resultSet.next()) {
-                // Determine the type of conflict
                 String existingName = resultSet.getString("cname");
                 String existingMobile = resultSet.getString("mobile");
                 String enteredName = txtenrName.getText();
@@ -121,7 +139,6 @@ public class enrollmentformController {
                     showAlert(Alert.AlertType.WARNING, "Duplicate Entry", "A user with this mobile number already exists.");
                 }
             } else {
-                // Insert the new user record
                 stmt = con.prepareStatement("INSERT INTO enrollmenttbl VALUES(?,?,?,?,?,?,CURRENT_DATE)");
                 stmt.setString(1, txtenrMob.getText());
                 stmt.setString(2, txtenrName.getText());
@@ -143,27 +160,22 @@ public class enrollmentformController {
         }
     }
 
-    //    @FXML
     @FXML
     void doFetch(ActionEvent event) {
         String name = txtenrName.getText();
 
         if (name.isEmpty()) {
-            // Show alert if name field is empty
             showAlert(Alert.AlertType.ERROR, "Input Error", "Name field is empty. Please enter a name.");
             return;
         }
 
         try {
-            // Prepare SQL query to fetch details based on name
             stmt = con.prepareStatement("SELECT * FROM enrollmenttbl WHERE cname = ?");
             stmt.setString(1, name);
 
-            // Execute query and process the result
             var resultSet = stmt.executeQuery();
 
             if (resultSet.next()) {
-                // Populate fields with fetched data
                 txtenrMob.setText(resultSet.getString("mobile"));
                 txtenrAddress.setText(resultSet.getString("address"));
                 txtenrCity.setText(resultSet.getString("city"));
@@ -172,7 +184,6 @@ public class enrollmentformController {
 
                 System.out.println("Details fetched successfully.");
             } else {
-                // Show alert if no record found
                 showAlert(Alert.AlertType.WARNING, "Not Found", "No user found with the entered name.");
             }
 
@@ -181,7 +192,6 @@ public class enrollmentformController {
             showAlert(Alert.AlertType.ERROR, "Database Error", "An error occurred while fetching details.");
         }
     }
-
 
     @FXML
     void initialize() {

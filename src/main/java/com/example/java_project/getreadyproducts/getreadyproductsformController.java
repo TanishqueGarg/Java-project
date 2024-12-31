@@ -11,10 +11,15 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
 public class getreadyproductsformController {
 
@@ -44,6 +49,36 @@ public class getreadyproductsformController {
 
     Connection con;
     PreparedStatement stmt;
+
+    private void showAlert(Alert.AlertType alertType, String title, String message) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
+    @FXML
+    private Button btnBack;
+
+    @FXML
+    void doBack(ActionEvent event) {
+        try {
+            // Load the admin panel FXML file
+            Parent adminPanel = FXMLLoader.load(getClass().getResource("/com/example/java_project/adminpanell/adminpanelView.fxml"));
+
+            // Get the current stage
+            Stage currentStage = (Stage) btnBack.getScene().getWindow();
+
+            // Set the admin panel scene
+            currentStage.setScene(new Scene(adminPanel));
+            currentStage.setTitle("Darjee");
+            currentStage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Error", "Unable to load the Admin Panel.");
+        }
+    }
 
     @FXML
     void doSearch(ActionEvent event) {

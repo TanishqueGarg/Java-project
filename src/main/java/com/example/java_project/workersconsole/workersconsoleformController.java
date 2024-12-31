@@ -9,9 +9,13 @@ import java.util.ResourceBundle;
 import com.example.java_project.DatabaseConnection;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
 public class workersconsoleformController {
 
@@ -33,6 +37,28 @@ public class workersconsoleformController {
     @FXML
     private TextField WCmobile;
 
+    @FXML
+    private Button btnBack;
+
+    @FXML
+    void doBack(ActionEvent event) {
+        try {
+            // Load the admin panel FXML file
+            Parent adminPanel = FXMLLoader.load(getClass().getResource("/com/example/java_project/adminpanell/adminpanelView.fxml"));
+
+            // Get the current stage
+            Stage currentStage = (Stage) btnBack.getScene().getWindow();
+
+            // Set the admin panel scene
+            currentStage.setScene(new Scene(adminPanel));
+            currentStage.setTitle("Darjee");
+            currentStage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Error", "Unable to load the Admin Panel.");
+        }
+    }
+
     String str="";
 
 //    @FXML
@@ -46,13 +72,14 @@ public class workersconsoleformController {
                 WCsplz.setText(str.trim());
             } else {
                 // Show a message indicating that the specialization is already selected
-                System.out.println("Specialization already added: " + selectedSpecialization);
+                showAlert(Alert.AlertType.WARNING, "Already Added", "Specialization already added: "+ selectedSpecialization);
+//                System.out.println("Specialization already added: " + selectedSpecialization);
             }
         }
     }
 
 
-    String[] SPLZ={"pent","shirt","coat"};
+    String[] SPLZ={"Pent","Shirt","Coat","T-Shirt","Kurta Pyjaama"};
 
     @FXML
     private TextField WCname;

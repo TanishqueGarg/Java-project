@@ -15,11 +15,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
@@ -76,8 +74,21 @@ public class measurementsformController {
 
     @FXML
     void MSRbtnnclose(ActionEvent event) {
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.close();
+        try {
+            // Load the admin panel FXML file
+            Parent adminPanel = FXMLLoader.load(getClass().getResource("/com/example/java_project/adminpanell/adminpanelView.fxml"));
+
+            // Get the current stage
+            Stage currentStage = (Stage) btnBack.getScene().getWindow();
+
+            // Set the admin panel scene
+            currentStage.setScene(new Scene(adminPanel));
+            currentStage.setTitle("Darjee");
+            currentStage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Error", "Unable to load the Admin Panel.");
+        }
     }
 
     @FXML
@@ -154,6 +165,35 @@ public class measurementsformController {
         }
     }
 
+    @FXML
+    private Button btnBack;
+
+    @FXML
+    void doBack(ActionEvent event) {
+        try {
+            // Load the admin panel FXML file
+            Parent adminPanel = FXMLLoader.load(getClass().getResource("/com/example/java_project/adminpanell/adminpanelView.fxml"));
+
+            // Get the current stage
+            Stage currentStage = (Stage) btnBack.getScene().getWindow();
+
+            // Set the admin panel scene
+            currentStage.setScene(new Scene(adminPanel));
+            currentStage.setTitle("Darjee");
+            currentStage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Error", "Unable to load the Admin Panel.");
+        }
+    }
+
+    private void showAlert(Alert.AlertType alertType, String title, String message) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
 
 
     PreparedStatement stmt;
@@ -236,7 +276,7 @@ public class measurementsformController {
         }
 
         try {
-            stmt = con.prepareStatement("SELECT * FROM measurements WHERE mobile = ?");
+            stmt = con.prepareStatement("SELECT * FROM measurements WHERE mobile = ? ORDER BY orderid DESC LIMIT 1");
             stmt.setString(1, mobile);
             var resultSet = stmt.executeQuery();
 
