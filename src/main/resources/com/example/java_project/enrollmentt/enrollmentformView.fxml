@@ -12,19 +12,14 @@
 
 <AnchorPane fx:controller="com.example.java_project.enrollment.enrollmentformController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <!-- Background Image -->
       <ImageView fitHeight="600.0" fitWidth="600.0" layoutX="0.0" layoutY="0.0">
          <image>
             <Image url="@../../../../images/new_background.jpg" />
          </image>
       </ImageView>
-
-      <!-- Back Button -->
       <Button fx:id="btnBack" layoutX="24.0" layoutY="24.0" mnemonicParsing="false" onAction="#doBack"
               style="-fx-background-color: black; -fx-text-fill: white; -fx-font-size: 14px;
                      -fx-border-radius: 5; -fx-background-radius: 5;" text="←" />
-
-      <!-- Title -->
       <Label layoutX="90.0" layoutY="25.0" style="-fx-font-size: 28px; -fx-font-weight: bold;
                                                   -fx-text-fill: white; -fx-effect: dropshadow(gaussian, black, 3, 0.5, 1, 1);"
              text="Customer Enrollment">
@@ -32,8 +27,6 @@
             <Font size="35.0" />
          </font>
       </Label>
-
-      <!-- Form Fields -->
       <Label layoutX="50.0" layoutY="100.0" style="-fx-text-fill: white; -fx-font-size: 14px;" text="Name:" />
       <TextField fx:id="txtenrName" layoutX="150.0" layoutY="95.0" prefWidth="265.0"
                  style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: #00f2fe;" />
@@ -57,8 +50,6 @@
       <Label layoutX="320.0" layoutY="300.0" style="-fx-text-fill: white; -fx-font-size: 14px;" text="DOB:" />
       <DatePicker fx:id="enrDob" layoutX="370.0" layoutY="295.0" prefWidth="130.0"
                   style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: #00f2fe;" />
-
-      <!-- Buttons -->
       <Button fx:id="btnFetch" layoutX="440.0" layoutY="95.0" mnemonicParsing="false" onAction="#doFetch"
               style="-fx-background-color: Black; -fx-text-fill: white; -fx-font-size: 14px;
                      -fx-border-radius: 5; -fx-background-radius: 5;" text="Fetch" />

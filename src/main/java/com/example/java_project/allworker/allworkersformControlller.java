@@ -30,7 +30,7 @@ public class allworkersformControlller {
     private Button AWbtnallworkers;
 
     @FXML
-    private Button AWbtnSearchWorkers; // New button for specialization-specific workers
+    private Button AWbtnSearchWorkers;
 
     @FXML
     private ComboBox<String> AWsplzcombo;
@@ -43,7 +43,7 @@ public class allworkersformControlller {
 
     @FXML
     void AWshowWorkers(ActionEvent event) {
-        loadWorkersTable(null); // Load all workers when button is clicked
+        loadWorkersTable(null);
     }
 
     private void showAlert(Alert.AlertType alertType, String title, String message) {
@@ -60,13 +60,8 @@ public class allworkersformControlller {
     @FXML
     void doBack(ActionEvent event) {
         try {
-            // Load the admin panel FXML file
             Parent adminPanel = FXMLLoader.load(getClass().getResource("/com/example/java_project/adminpanell/adminpanelView.fxml"));
-
-            // Get the current stage
             Stage currentStage = (Stage) btnBack.getScene().getWindow();
-
-            // Set the admin panel scene
             currentStage.setScene(new Scene(adminPanel));
             currentStage.setTitle("Darjee");
             currentStage.show();
@@ -83,7 +78,7 @@ public class allworkersformControlller {
             System.out.println("No specialization selected.");
             return;
         }
-        loadWorkersTable(selectedSpecialization); // Load workers by specialization
+        loadWorkersTable(selectedSpecialization);
     }
 
     void loadWorkersTable(String specialization) {
@@ -107,8 +102,6 @@ public class allworkersformControlller {
         Cspl.setMinWidth(100);
 
         AWtblallworkers.getColumns().addAll(uidC, Cage, Cdt, Cspl);
-
-        // Fetch and display data
         AWtblallworkers.setItems(getRecords(specialization));
     }
 
@@ -166,7 +159,7 @@ public class allworkersformControlller {
             System.out.println("Connection Did not Established");
         } else {
             System.out.println("Connection Done");
-            populateComboBox(); // Initialize combo box with specializations
+            populateComboBox();
         }
     }
 }

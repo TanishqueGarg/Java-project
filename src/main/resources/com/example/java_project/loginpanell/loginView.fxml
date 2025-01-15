@@ -9,30 +9,23 @@
 
 <AnchorPane prefHeight="450.0" prefWidth="466.0" style="-fx-background-color: linear-gradient(to right, #6a11cb, #2575fc);" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.java_project.loginpanel.loginController">
    <children>
-      <!-- Main Content Container -->
       <VBox alignment="CENTER" layoutX="83.0" layoutY="56.0" prefHeight="300.0" prefWidth="300.0" spacing="20.0" style="-fx-background-color: white; -fx-border-radius: 20; -fx-background-radius: 20; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 12, 0, 0, 5); -fx-padding: 30;">
          <children>
-            <!-- Header Icon -->
             <Label prefHeight="51.0" prefWidth="41.0" style="-fx-text-fill: #2575fc;" text="🔒">
                <font>
                   <Font size="40.0" />
                </font>
             </Label>
-            <!-- Header Title -->
             <Label style="-fx-text-fill: #2575fc; -fx-font-weight: bold;" text="Verify It's You">
                <font>
                   <Font size="22.0" />
                </font>
             </Label>
-            <!-- Instructional Text -->
             <Label style="-fx-text-fill: gray; -fx-font-size: 14;" text="Enter the password to continue" />
-            <!-- Password Field -->
             <PasswordField fx:id="pwdVal" promptText="Enter your password" style="-fx-border-color: #2575fc; -fx-border-radius: 15; -fx-background-radius: 15; -fx-padding: 10; -fx-font-size: 14;" />
-            <!-- Login Button -->
             <Button fx:id="btnCheckid" onAction="#btnCheck" style="-fx-background-color: #2575fc; -fx-text-fill: white; -fx-font-size: 16; -fx-font-weight: bold; -fx-border-radius: 15; -fx-background-radius: 15; -fx-padding: 10 30;" text="Login" />
          </children>
       </VBox>
-      <!-- Footer Text -->
       <Label layoutX="161.0" layoutY="408.0" style="-fx-text-fill: white; -fx-font-size: 12; -fx-opacity: 0.9;" text="© 2024 Powered by JavaFX" />
    </children>
 </AnchorPane>

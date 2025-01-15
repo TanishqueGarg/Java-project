@@ -45,13 +45,8 @@ public class settingsController {
     @FXML
     void doBack(ActionEvent event) {
         try {
-            // Load the admin panel FXML file
             Parent adminPanel = FXMLLoader.load(getClass().getResource("/com/example/java_project/adminpanell/adminpanelView.fxml"));
-
-            // Get the current stage
             Stage currentStage = (Stage) btnBack.getScene().getWindow();
-
-            // Set the admin panel scene
             currentStage.setScene(new Scene(adminPanel));
             currentStage.setTitle("Darjee");
             currentStage.show();
@@ -67,29 +62,20 @@ public class settingsController {
         String newPassword = txtnewpwd.getText().trim();
         String confirmPassword = txtcnfmpwd.getText().trim();
 
-        // Check if the old password matches the current password
         if (!oldPassword.equals(PasswordManager.getPassword())) {
             showAlert("Error", "The old password is incorrect.", Alert.AlertType.ERROR);
             return;
         }
-
-        // Check if the new password matches the confirm password
         if (!newPassword.equals(confirmPassword)) {
             showAlert("Error", "The new password and confirm password do not match.", Alert.AlertType.ERROR);
             return;
         }
-
-        // Check if the new password is empty
         if (newPassword.isEmpty() || confirmPassword.isEmpty()) {
             showAlert("Error", "Password fields cannot be empty.", Alert.AlertType.ERROR);
             return;
         }
-
-        // Update the current password
         PasswordManager.setPassword(newPassword);
         showAlert("Success", "Password updated successfully!", Alert.AlertType.INFORMATION);
-
-        // Clear the text fields
         txtoldpwd.clear();
         txtnewpwd.clear();
         txtcnfmpwd.clear();

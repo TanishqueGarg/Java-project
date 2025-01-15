@@ -8,8 +8,6 @@ public class OrderDetails {
     private int bill;
     private String worker;
     private String rstatus;
-
-    // Constructor
     public OrderDetails(int orderId, String mobile, String dress, int bill, String worker, String rstatus) {
         this.orderId = orderId;
         this.mobile = mobile;
@@ -18,53 +16,39 @@ public class OrderDetails {
         this.worker = worker;
         this.rstatus = rstatus;
     }
-
-    // Getters
     public int getOrderId() {
         return orderId;
     }
-
     public String getMobile() {
         return mobile;
     }
-
     public String getDress() {
         return dress;
     }
-
     public int getBill() {
         return bill;
     }
-
     public String getWorker() {
         return worker;
     }
-
     public String getRstatus() {
         return rstatus;
     }
-
-    // Setters
     public void setOrderId(int orderId) {
         this.orderId = orderId;
     }
-
     public void setMobile(String mobile) {
         this.mobile = mobile;
     }
-
     public void setDress(String dress) {
         this.dress = dress;
     }
-
     public void setBill(int bill) {
         this.bill = bill;
     }
-
     public void setWorker(String worker) {
         this.worker = worker;
     }
-
     public void setRstatus(String rstatus) {
         this.rstatus = rstatus;
     }

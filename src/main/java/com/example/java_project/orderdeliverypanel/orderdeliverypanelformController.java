@@ -69,13 +69,8 @@ public class orderdeliverypanelformController {
     @FXML
     void doBack(ActionEvent event) {
         try {
-            // Load the admin panel FXML file
             Parent adminPanel = FXMLLoader.load(getClass().getResource("/com/example/java_project/adminpanell/adminpanelView.fxml"));
-
-            // Get the current stage
             Stage currentStage = (Stage) btnBack.getScene().getWindow();
-
-            // Set the admin panel scene
             currentStage.setScene(new Scene(adminPanel));
             currentStage.setTitle("Darjee");
             currentStage.show();
@@ -93,8 +88,6 @@ public class orderdeliverypanelformController {
             System.out.println("Please enter a mobile number.");
             return;
         }
-
-        // Clear the existing data in ListViews
         ODPorderidlist.getItems().clear();
         ODPitemlist.getItems().clear();
         ODPbilllist.getItems().clear();
@@ -107,25 +100,19 @@ public class orderdeliverypanelformController {
 
             ResultSet rs = stmt.executeQuery();
 
-            int totalBill = 0; // To calculate total bill amount
+            int totalBill = 0;
 
             while (rs.next()) {
                 String orderId = rs.getString("orderid");
                 String item = rs.getString("dress");
                 int bill = rs.getInt("bill");
                 int rstatus = rs.getInt("rstatus");
-
-                // Add data to respective ListViews
                 ODPorderidlist.getItems().add(orderId);
                 ODPitemlist.getItems().add(item);
                 ODPbilllist.getItems().add(String.valueOf(bill));
                 ODPstatuslist.getItems().add(rstatus == 1 ? "Ready" : "Pending");
-
-                // Add to total bill
                 totalBill += bill;
             }
-
-            // Display the total bill in the TextField
             ODPtotalbill.setText(String.valueOf(totalBill));
 
         } catch (Exception e) {
@@ -143,8 +130,6 @@ public class orderdeliverypanelformController {
             for (int i = 0; i < orderIds.size(); i++) {
                 String orderId = orderIds.get(i);
                 String status = statuses.get(i);
-
-                // Only update if the status is "Ready"
                 if ("Ready".equals(status)) {
                     String query = "UPDATE measurements SET dstatus = 1 WHERE orderid = ?";
                     stmt = con.prepareStatement(query);
@@ -152,8 +137,6 @@ public class orderdeliverypanelformController {
                     stmt.executeUpdate();
                 }
             }
-
-            // Refresh the view by removing all items and recalculating the total bill
             doFindOrders(null);
         } catch (Exception e) {
             e.printStackTrace();
@@ -172,7 +155,6 @@ public class orderdeliverypanelformController {
         assert ODPtotalbill != null : "fx:id=\"ODPtotalbill\" was not injected: check your FXML file 'orderdeliverypanelformView.fxml'.";
         assert ODPtxtmobile != null : "fx:id=\"ODPtxtmobile\" was not injected: check your FXML file 'orderdeliverypanelformView.fxml'.";
 
-        // Initialize database connection
         con = DatabaseConnection.doConnect();
         if (con == null) {
             System.out.println("Database connection failed.");
@@ -180,7 +162,6 @@ public class orderdeliverypanelformController {
             System.out.println("Database connection established.");
         }
 
-        // Add double-click event listeners to all columns
         addDoubleClickListener(ODPorderidlist);
         addDoubleClickListener(ODPitemlist);
         addDoubleClickListener(ODPbilllist);
@@ -189,7 +170,7 @@ public class orderdeliverypanelformController {
 
     private void addDoubleClickListener(ListView<String> listView) {
         listView.setOnMouseClicked(event -> {
-            if (event.getClickCount() == 2) { // Double-click
+            if (event.getClickCount() == 2) {
                 int selectedIndex = listView.getSelectionModel().getSelectedIndex();
                 if (selectedIndex != -1) {
                     String selectedOrderId = ODPorderidlist.getItems().get(selectedIndex);
@@ -201,20 +182,14 @@ public class orderdeliverypanelformController {
 
     private void handleDoubleClick(String orderId) {
         try {
-            // Find the selected order's index
             int selectedIndex = ODPorderidlist.getItems().indexOf(orderId);
 
-            // Get the corresponding status
             String status = ODPstatuslist.getItems().get(selectedIndex);
-
-            // Only update if the status is "Ready"
             if ("Ready".equals(status)) {
                 String query = "UPDATE measurements SET dstatus = 1 WHERE orderid = ?";
                 stmt = con.prepareStatement(query);
                 stmt.setString(1, orderId);
                 stmt.executeUpdate();
-
-                // Refresh the view by removing the selected item and recalculating the total bill
                 doFindOrders(null);
             } else {
                 System.out.println("Order ID " + orderId + " cannot be delivered. Status is not 'Ready'.");

@@ -31,13 +31,8 @@ public class enrollmentformController {
     @FXML
     void doBack(ActionEvent event) {
         try {
-            // Load the admin panel FXML file
             Parent adminPanel = FXMLLoader.load(getClass().getResource("/com/example/java_project/adminpanell/adminpanelView.fxml"));
-
-            // Get the current stage
             Stage currentStage = (Stage) btnBack.getScene().getWindow();
-
-            // Set the admin panel scene
             currentStage.setScene(new Scene(adminPanel));
             currentStage.setTitle("Darjee");
             currentStage.show();

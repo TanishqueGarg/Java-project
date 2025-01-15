@@ -43,13 +43,8 @@ public class workersconsoleformController {
     @FXML
     void doBack(ActionEvent event) {
         try {
-            // Load the admin panel FXML file
             Parent adminPanel = FXMLLoader.load(getClass().getResource("/com/example/java_project/adminpanell/adminpanelView.fxml"));
-
-            // Get the current stage
             Stage currentStage = (Stage) btnBack.getScene().getWindow();
-
-            // Set the admin panel scene
             currentStage.setScene(new Scene(adminPanel));
             currentStage.setTitle("Darjee");
             currentStage.show();
@@ -61,19 +56,15 @@ public class workersconsoleformController {
 
     String str="";
 
-//    @FXML
     @FXML
     void doAddSelected(MouseEvent event) {
         if (event.getClickCount() == 2) {
             String selectedSpecialization = WCsplzList.getSelectionModel().getSelectedItem();
-            // Check if the selected specialization is already in the text field
             if (!str.contains(selectedSpecialization)) {
                 str += selectedSpecialization + " ";
                 WCsplz.setText(str.trim());
             } else {
-                // Show a message indicating that the specialization is already selected
                 showAlert(Alert.AlertType.WARNING, "Already Added", "Specialization already added: "+ selectedSpecialization);
-//                System.out.println("Specialization already added: " + selectedSpecialization);
             }
         }
     }
@@ -92,16 +83,12 @@ public class workersconsoleformController {
 
     @FXML
     void doWCnew(ActionEvent event) {
-        // Clear all the input fields
         WCname.clear();
         WCaddress.clear();
         WCmobile.clear();
         WCsplz.clear();
 
-        // Clear the `str` variable used for concatenating specializations
         str = "";
-
-        // Optionally, clear any selection in the ListView
         WCsplzList.getSelectionModel().clearSelection();
 
         System.out.println("Fields cleared for new worker entry.");
@@ -112,30 +99,25 @@ public class workersconsoleformController {
 
     @FXML
     void doWCsave(ActionEvent event) {
-        // Check if all fields are filled
         if (WCname.getText().trim().isEmpty() ||
                 WCaddress.getText().trim().isEmpty() ||
                 WCmobile.getText().trim().isEmpty() ||
                 WCsplz.getText().trim().isEmpty()) {
 
-            // Alert if any field is empty
             showAlert(Alert.AlertType.WARNING, "Missing Fields", "Please fill all fields before saving.");
             return;
         }
 
         try {
-            // Check if mobile number already exists
             PreparedStatement checkStmt = con.prepareStatement("SELECT COUNT(*) FROM workers WHERE mobile = ?");
             checkStmt.setString(1, WCmobile.getText());
             var resultSet = checkStmt.executeQuery();
 
             if (resultSet.next() && resultSet.getInt(1) > 0) {
-                // Alert if the mobile number already exists
                 showAlert(Alert.AlertType.ERROR, "Duplicate Mobile Number", "The mobile number already exists. Please use a unique mobile number.");
                 return;
             }
 
-            // Proceed to save the record
             stmt = con.prepareStatement("INSERT INTO workers (wname, address, mobile, splz) VALUES (?, ?, ?, ?)");
             stmt.setString(1, WCname.getText());
             stmt.setString(2, WCaddress.getText());
@@ -143,7 +125,6 @@ public class workersconsoleformController {
             stmt.setString(4, WCsplz.getText());
             stmt.executeUpdate();
 
-            // Confirmation alert
             showAlert(Alert.AlertType.INFORMATION, "Success", "Worker record saved successfully.");
             System.out.println("Record Saved");
 

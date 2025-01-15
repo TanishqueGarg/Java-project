@@ -34,8 +34,8 @@ public class measurementsformController {
     @FXML
     private TextField MSRbill;
 
-    private String uploadedImageName = ""; // To store the uploaded image name
-    private String uploadedImagePath = ""; // To store the uploaded image's full path
+    private String uploadedImageName = "";
+    private String uploadedImagePath = "";
 
     @FXML
     private ImageView MSRdesign;
@@ -69,19 +69,14 @@ public class measurementsformController {
     @FXML
     private ComboBox<String> MSRworkers;
 
-    private final String IMAGES_FOLDER = "images/"; // Folder to save images
+    private final String IMAGES_FOLDER = "Java_Project/images/";
 
 
     @FXML
     void MSRbtnnclose(ActionEvent event) {
         try {
-            // Load the admin panel FXML file
             Parent adminPanel = FXMLLoader.load(getClass().getResource("/com/example/java_project/adminpanell/adminpanelView.fxml"));
-
-            // Get the current stage
             Stage currentStage = (Stage) btnBack.getScene().getWindow();
-
-            // Set the admin panel scene
             currentStage.setScene(new Scene(adminPanel));
             currentStage.setTitle("Darjee");
             currentStage.show();
@@ -94,16 +89,9 @@ public class measurementsformController {
     @FXML
     void MSRbtnnnew(ActionEvent event) {
         try {
-            // Get the current stage
             Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-            // Load the FXML file (ensure the path is correct)
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/java_project/measurementss/measurementsformView.fxml"));
-
-            // Create a new scene with the loaded FXML
             Scene newScene = new Scene(loader.load());
-
-            // Set the new scene to the current stage and show it
             currentStage.setScene(newScene);
             currentStage.show();
         } catch (IOException e) {
@@ -113,15 +101,12 @@ public class measurementsformController {
 
     @FXML
     void MSRbtnnupdate(ActionEvent event) {
-        // Ensure a mobile number is provided
         String mobile = MSRmobile.getText();
         if (mobile.isEmpty()) {
             System.out.println("Mobile number is required to update data.");
             showAlert("Missing Mobile Number", "Please fetch or provide a mobile number to update the record.");
             return;
         }
-
-        // Ensure required fields are not empty
         if (MSRdress.getSelectionModel().isEmpty() || MSRworkers.getSelectionModel().isEmpty() || uploadedImageName.isEmpty()) {
             System.out.println("Required fields are missing.");
             showAlert("Missing Fields", "Please ensure all required fields (dress, worker, and image) are filled before updating.");
@@ -129,26 +114,23 @@ public class measurementsformController {
         }
 
         try {
-            // Update the database record with new values
             String updateQuery = "UPDATE measurements SET dress = ?, pic = ?, dodel = ?, price = ?, qty = ?, bill = ?, measurements = ?, worker = ? WHERE mobile = ?";
             stmt = con.prepareStatement(updateQuery);
-
-            // Set the parameters
-            stmt.setString(1, MSRdress.getSelectionModel().getSelectedItem()); // Dress type
-            stmt.setString(2, uploadedImageName); // Image name
+            stmt.setString(1, MSRdress.getSelectionModel().getSelectedItem());
+            stmt.setString(2, uploadedImageName);
             LocalDate local = MSRdob.getValue();
             if (local != null) {
-                stmt.setDate(3, java.sql.Date.valueOf(local)); // Delivery date
+                stmt.setDate(3, java.sql.Date.valueOf(local));
             } else {
                 stmt.setNull(3, java.sql.Types.DATE);
             }
-            stmt.setInt(4, Integer.parseInt(MSRprice.getText())); // Price per item
-            stmt.setInt(5, Integer.parseInt(MSRquantity.getText())); // Quantity
+            stmt.setInt(4, Integer.parseInt(MSRprice.getText()));
+            stmt.setInt(5, Integer.parseInt(MSRquantity.getText()));
             int bill = Integer.parseInt(MSRprice.getText()) * Integer.parseInt(MSRquantity.getText());
-            stmt.setInt(6, bill); // Total bill
-            stmt.setString(7, MSRmeasurements.getText()); // Measurements details
-            stmt.setString(8, MSRworkers.getSelectionModel().getSelectedItem()); // Worker
-            stmt.setString(9, mobile); // Mobile number (identifier for update)
+            stmt.setInt(6, bill);
+            stmt.setString(7, MSRmeasurements.getText());
+            stmt.setString(8, MSRworkers.getSelectionModel().getSelectedItem());
+            stmt.setString(9, mobile);
 
             int rowsUpdated = stmt.executeUpdate();
             if (rowsUpdated > 0) {
@@ -171,13 +153,8 @@ public class measurementsformController {
     @FXML
     void doBack(ActionEvent event) {
         try {
-            // Load the admin panel FXML file
             Parent adminPanel = FXMLLoader.load(getClass().getResource("/com/example/java_project/adminpanell/adminpanelView.fxml"));
-
-            // Get the current stage
             Stage currentStage = (Stage) btnBack.getScene().getWindow();
-
-            // Set the admin panel scene
             currentStage.setScene(new Scene(adminPanel));
             currentStage.setTitle("Darjee");
             currentStage.show();
@@ -194,59 +171,27 @@ public class measurementsformController {
         alert.setContentText(message);
         alert.showAndWait();
     }
-
-
     PreparedStatement stmt;
     @FXML
     void MSRbtnsave(ActionEvent event) {
-
-//        try
-//        {
-//            stmt= con.prepareStatement("insert into measurements(mobile,dress,pic,dodel,qty,bill,measurements,worker,doorder) values(?,?,?,?,?,?,?,?,current_date)");
-//            stmt.setString(1,(MSRmobile.getText()));
-//            stmt.setString(2,MSRdress.getSelectionModel().getSelectedItem().toString());
-//            stmt.setString(3,MSRdesign.imageProperty().getName().toString());
-//            LocalDate local=MSRdob.getValue();
-//            java.sql.Date date=java.sql.Date.valueOf(local);
-//            stmt.setDate(4, date);
-//            //int-5,6
-//            stmt.setInt(5,Integer.parseInt(MSRquantity.getText()));
-//            int billll=Integer.parseInt(MSRprice.getText())*Integer.parseInt(MSRquantity.getText());
-//            stmt.setInt(6,billll);
-//            stmt.setString(7,MSRmeasurements.getText());
-//            stmt.setString(8,MSRworkers.getSelectionModel().getSelectedItem().toString());
-//            stmt.executeUpdate();
-//            System.out.println("Record Saved");
-//
-//        }
-//        catch(Exception exp)
-//        {
-//            exp.printStackTrace();
-//        }
-
         if (uploadedImageName.isEmpty()) {
             System.out.println("No image uploaded. Please upload an image before saving.");
             return;
         }
 
         try {
-            // Save image to the "images" folder
             File sourceFile = new File(uploadedImagePath);
             File destFile = new File(IMAGES_FOLDER + uploadedImageName);
 
             if (!destFile.getParentFile().exists()) {
-                destFile.getParentFile().mkdirs(); // Create "images" folder if it doesn't exist
+                destFile.getParentFile().mkdirs();
             }
 
             Files.copy(sourceFile.toPath(), destFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
-
-            // Prepare SQL insert statement
             stmt = con.prepareStatement("INSERT INTO measurements (mobile, dress, pic, dodel, price, qty, bill, measurements, worker, doorder) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, CURRENT_DATE)");
-
-            // Set parameters
             stmt.setString(1, MSRmobile.getText());
             stmt.setString(2, MSRdress.getSelectionModel().getSelectedItem());
-            stmt.setString(3, uploadedImageName); // Save image name in DB
+            stmt.setString(3, uploadedImageName);
             LocalDate local = MSRdob.getValue();
             java.sql.Date date = java.sql.Date.valueOf(local);
             stmt.setDate(4, date);
@@ -283,8 +228,6 @@ public class measurementsformController {
             if (resultSet.next()) {
                 MSRdress.getSelectionModel().select(resultSet.getString("dress"));
                 uploadedImageName = resultSet.getString("pic");
-
-                // Load the image from the images folder
                 File imageFile = new File(IMAGES_FOLDER + uploadedImageName);
                 if (imageFile.exists()) {
                     Image image = new Image(imageFile.toURI().toString());
@@ -348,8 +291,6 @@ public class measurementsformController {
 
     }
 
-
-
     Connection con;
     @FXML
     void initialize() {
@@ -369,27 +310,21 @@ public class measurementsformController {
             System.out.println("Connection Did not Established");
         else
             System.out.println("Connection Done");
-
-        // Populate dress combo box with predefined values
         MSRdress.getItems().addAll(dressss);
-
-        // Populate workers combo box from database
         loadWorkersFromDatabase();
-
-        // Add listeners to calculate the bill automatically
         MSRquantity.textProperty().addListener((observable, oldValue, newValue) -> calculateBill());
         MSRprice.textProperty().addListener((observable, oldValue, newValue) -> calculateBill());
     }
 
     private void loadWorkersFromDatabase() {
         try {
-            String query = "SELECT wname FROM workers";  // Modify this query according to your database schema
+            String query = "SELECT wname FROM workers";
             PreparedStatement stmt = con.prepareStatement(query);
             var resultSet = stmt.executeQuery();
 
             while (resultSet.next()) {
                 String workerName = resultSet.getString("wname");
-                MSRworkers.getItems().add(workerName);  // Add each worker's name to the ComboBox
+                MSRworkers.getItems().add(workerName);
             }
         } catch (Exception exp) {
             exp.printStackTrace();
@@ -400,17 +335,11 @@ public class measurementsformController {
 
     private void calculateBill() {
         try {
-            // Parse the quantity and price fields
             int quantity = Integer.parseInt(MSRquantity.getText().trim());
             int price = Integer.parseInt(MSRprice.getText().trim());
-
-            // Calculate the bill
             int bill = quantity * price;
-
-            // Set the calculated bill in the bill field
             MSRbill.setText(String.valueOf(bill));
         } catch (NumberFormatException e) {
-            // Clear the bill field if inputs are invalid
             MSRbill.clear();
         }
     }

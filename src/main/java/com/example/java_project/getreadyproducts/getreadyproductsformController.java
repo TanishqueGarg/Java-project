@@ -64,13 +64,8 @@ public class getreadyproductsformController {
     @FXML
     void doBack(ActionEvent event) {
         try {
-            // Load the admin panel FXML file
             Parent adminPanel = FXMLLoader.load(getClass().getResource("/com/example/java_project/adminpanell/adminpanelView.fxml"));
-
-            // Get the current stage
             Stage currentStage = (Stage) btnBack.getScene().getWindow();
-
-            // Set the admin panel scene
             currentStage.setScene(new Scene(adminPanel));
             currentStage.setTitle("Darjee");
             currentStage.show();
@@ -82,33 +77,27 @@ public class getreadyproductsformController {
 
     @FXML
     void doSearch(ActionEvent event) {
-        String selectedWorker = GRPcomboworkers.getValue(); // Get selected worker name from the ComboBox
+        String selectedWorker = GRPcomboworkers.getValue();
 
         if (selectedWorker == null || selectedWorker.isEmpty()) {
             System.out.println("Please select a worker first.");
             return;
         }
-
-        // Clear existing data in the ListViews
         GRPlistorders.getItems().clear();
         GRPlistproducts.getItems().clear();
         GRPlistdod.getItems().clear();
 
         try {
-            // Query to fetch order ID, dress, and delivery date for the selected worker where rstatus = 0
             String query = "SELECT orderid, dress, dodel FROM measurements WHERE worker = ? AND rstatus = 0";
             stmt = con.prepareStatement(query);
-            stmt.setString(1, selectedWorker); // Set the selected worker name in the query
+            stmt.setString(1, selectedWorker);
 
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
-                // Get the order ID, dress name, and delivery date from the result set
                 String orderId = rs.getString("orderid");
                 String dress = rs.getString("dress");
                 String dod = rs.getString("dodel");
-
-                // Add the data to the corresponding ListViews
                 GRPlistorders.getItems().add(orderId);
                 GRPlistproducts.getItems().add(dress);
                 GRPlistdod.getItems().add(dod);
@@ -129,16 +118,12 @@ public class getreadyproductsformController {
                 System.out.println("Please select a worker first.");
                 return;
             }
-
-            // Update rstatus to 1 for all records of the selected worker
             String updateQuery = "UPDATE measurements SET rstatus = 1 WHERE worker = ? AND rstatus = 0";
             stmt = con.prepareStatement(updateQuery);
             stmt.setString(1, selectedWorker);
             int rowsUpdated = stmt.executeUpdate();
 
             System.out.println("Marked " + rowsUpdated + " orders as received for worker: " + selectedWorker);
-
-            // Refresh the ListViews
             doSearch(event);
         } catch (Exception e) {
             e.printStackTrace();
@@ -148,7 +133,7 @@ public class getreadyproductsformController {
     void populateComboBox() {
         ObservableList<String> workers = FXCollections.observableArrayList();
         try {
-            String query = "SELECT wname FROM workers"; // Fetch worker names from the workers table
+            String query = "SELECT wname FROM workers";
             stmt = con.prepareStatement(query);
             ResultSet rs = stmt.executeQuery();
 
@@ -157,23 +142,20 @@ public class getreadyproductsformController {
                 workers.add(workerName);
             }
 
-            GRPcomboworkers.setItems(workers); // Populate the ComboBox
+            GRPcomboworkers.setItems(workers);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
-    // Handle double-click to update the rstatus
     private void addDoubleClickHandlerToListView(ListView<String> listView) {
         listView.setOnMouseClicked((MouseEvent event) -> {
-            if (event.getClickCount() == 2) { // Double-click detected
+            if (event.getClickCount() == 2) {
                 int selectedIndex = listView.getSelectionModel().getSelectedIndex();
 
-                if (selectedIndex != -1) { // Ensure a valid row is selected
-                    String selectedOrderId = GRPlistorders.getItems().get(selectedIndex); // Get the corresponding order ID
+                if (selectedIndex != -1) {
+                    String selectedOrderId = GRPlistorders.getItems().get(selectedIndex);
 
                     try {
-                        // Update the rstatus of the selected order ID to 1
                         String updateQuery = "UPDATE measurements SET rstatus = 1 WHERE orderid = ?";
                         stmt = con.prepareStatement(updateQuery);
                         stmt.setString(1, selectedOrderId);
@@ -182,11 +164,9 @@ public class getreadyproductsformController {
                         if (rowsUpdated > 0) {
                             System.out.println("Order " + selectedOrderId + " marked as delivered.");
                         }
-
-                        // Refresh the ListView
                         String selectedWorker = GRPcomboworkers.getValue();
                         if (selectedWorker != null && !selectedWorker.isEmpty()) {
-                            doSearch(null); // Refresh data
+                            doSearch(null);
                         }
 
                     } catch (Exception e) {
@@ -211,9 +191,7 @@ public class getreadyproductsformController {
             System.out.println("Connection Did not Established");
         } else {
             System.out.println("Connection Done");
-            populateComboBox(); // Populate the ComboBox with workers
-
-            // Add double-click handlers to all ListViews
+            populateComboBox();
             addDoubleClickHandlerToListView(GRPlistorders);
             addDoubleClickHandlerToListView(GRPlistproducts);
             addDoubleClickHandlerToListView(GRPlistdod);

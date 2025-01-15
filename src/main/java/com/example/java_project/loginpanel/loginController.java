@@ -22,17 +22,13 @@ public class loginController {
         String enteredPassword = pwdVal.getText().trim();
 
         if (enteredPassword.equals(PasswordManager.getPassword())) {
-            // Close the current login window
             ((javafx.stage.Stage) pwdVal.getScene().getWindow()).close();
-
-            // Open the admin panel
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/java_project/adminpanell/adminpanelView.fxml"));
                 Scene scene = new Scene(fxmlLoader.load());
                 Stage stage = new Stage();
                 stage.setScene(scene);
                 stage.setTitle("Darjee");
-//                stage.initStyle(StageStyle.UTILITY);
                 stage.show();
             } catch (IOException e) {
                 e.printStackTrace();

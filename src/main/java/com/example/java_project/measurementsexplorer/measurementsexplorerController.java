@@ -49,7 +49,6 @@ public class measurementsexplorerController {
         ObservableList<OrderDetails> orderList = FXCollections.observableArrayList();
         StringBuilder query = new StringBuilder("SELECT orderid, mobile, dress, bill, worker, rstatus FROM measurements WHERE 1=1");
 
-        // Add filters based on inputs
         if (!MEcustomermob.getText().isEmpty()) {
             query.append(" AND mobile = ?");
         }
@@ -64,8 +63,6 @@ public class measurementsexplorerController {
             stmt = con.prepareStatement(query.toString());
 
             int paramIndex = 1;
-
-            // Set parameters for filters
             if (!MEcustomermob.getText().isEmpty()) {
                 stmt.setString(paramIndex++, MEcustomermob.getText());
             }
@@ -111,13 +108,10 @@ public class measurementsexplorerController {
     @FXML
     void doBack(ActionEvent event) {
         try {
-            // Load the admin panel FXML file
             Parent adminPanel = FXMLLoader.load(getClass().getResource("/com/example/java_project/adminpanell/adminpanelView.fxml"));
 
-            // Get the current stage
             Stage currentStage = (Stage) btnBack.getScene().getWindow();
 
-            // Set the admin panel scene
             currentStage.setScene(new Scene(adminPanel));
             currentStage.setTitle("Darjee");
             currentStage.show();
@@ -129,10 +123,10 @@ public class measurementsexplorerController {
 
     @FXML
     void MEdoClear(ActionEvent event) {
-        MEorderstatus.getSelectionModel().clearSelection(); // Clear selected order status
-        MEworkers.getSelectionModel().clearSelection();    // Clear selected worker
-        MEcustomermob.clear();                             // Clear customer mobile text field
-        MEtblOrders.getItems().clear();                    // Clear the table view
+        MEorderstatus.getSelectionModel().clearSelection();
+        MEworkers.getSelectionModel().clearSelection();
+        MEcustomermob.clear();
+        MEtblOrders.getItems().clear();
     }
 
 
@@ -201,7 +195,7 @@ public class measurementsexplorerController {
         TableColumn<OrderDetails, String> colStatus = new TableColumn<>("Status");
         colStatus.setCellValueFactory(new PropertyValueFactory<>("rstatus"));
 
-        MEtblOrders.getColumns().clear(); // Clear existing columns
+        MEtblOrders.getColumns().clear();
         MEtblOrders.getColumns().addAll(colOrderId, colMobile, colDress, colBill, colWorker, colStatus);
     }
 }

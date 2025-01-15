@@ -12,56 +12,33 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.java_project.measurements.measurementsformController">
    <children>
-      <!-- Background -->
       <ImageView fitHeight="600.0" fitWidth="600.0" layoutX="0.0" layoutY="0.0">
          <image>
             <Image url="@../../../../images/new_background.jpg" />
          </image>
       </ImageView>
-
-      <!-- Title -->
       <Label layoutX="150.0" layoutY="20.0" style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: white; -fx-effect: dropshadow(gaussian, black, 2, 0.7, 1, 1);" text="Measurements Form" />
-
-      <!-- Back Button -->
       <Button fx:id="btnBack" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#doBack" style="-fx-background-color: black; -fx-text-fill: white; -fx-font-size: 14px; -fx-border-radius: 5; -fx-background-radius: 5;" text="←" />
-
-      <!-- Mobile Number -->
       <Label layoutX="50.0" layoutY="80.0" style="-fx-font-size: 14px; -fx-text-fill: white;" text="Mobile:" />
       <TextField fx:id="MSRmobile" layoutX="120.0" layoutY="76.0" prefWidth="240.0" style="-fx-background-radius: 5; -fx-border-color: #00f2fe;" />
       <Button layoutX="380.0" layoutY="75.0" onAction="#MSRbtnfetch" style="-fx-background-color: black; -fx-text-fill: white; -fx-font-size: 13px; -fx-border-radius: 5; -fx-background-radius: 5;" text="Fetch" />
-
-      <!-- Dress Type -->
       <Label layoutX="50.0" layoutY="120.0" style="-fx-font-size: 14px; -fx-text-fill: white;" text="Dress:" />
       <ComboBox fx:id="MSRdress" layoutX="120.0" layoutY="116.0" prefWidth="240.0" style="-fx-background-radius: 5; -fx-border-color: #00f2fe;" />
-
-      <!-- Delivery Date -->
       <Label layoutX="50.0" layoutY="160.0" style="-fx-font-size: 14px; -fx-text-fill: white;" text="Delivery Date:" />
       <DatePicker fx:id="MSRdob" layoutX="160.0" layoutY="156.0" style="-fx-background-radius: 5; -fx-border-color: #00f2fe;" />
-
-      <!-- Quantity and Price -->
       <Label layoutX="50.0" layoutY="200.0" style="-fx-font-size: 14px; -fx-text-fill: white;" text="Quantity:" />
       <TextField fx:id="MSRquantity" layoutX="120.0" layoutY="196.0" prefWidth="80.0" style="-fx-background-radius: 5; -fx-border-color: #00f2fe;" />
       <Label layoutX="220.0" layoutY="200.0" style="-fx-font-size: 14px; -fx-text-fill: white;" text="Price/Unit:" />
       <TextField fx:id="MSRprice" layoutX="300.0" layoutY="196.0" prefWidth="80.0" style="-fx-background-radius: 5; -fx-border-color: #00f2fe;" />
-
-      <!-- Total Bill -->
       <Label layoutX="50.0" layoutY="240.0" style="-fx-font-size: 14px; -fx-text-fill: white;" text="Bill:" />
       <TextField fx:id="MSRbill" layoutX="120.0" layoutY="236.0" prefWidth="260.0" style="-fx-background-radius: 5; -fx-border-color: #00f2fe;" />
-
-      <!-- Measurements -->
       <Label layoutX="50.0" layoutY="280.0" style="-fx-font-size: 14px; -fx-text-fill: white;" text="Measurements:" />
       <TextArea fx:id="MSRmeasurements" layoutX="50.0" layoutY="300.0" prefHeight="80.0" prefWidth="500.0" style="-fx-background-radius: 5; -fx-border-color: #00f2fe;" />
-
-      <!-- Workers -->
       <Label layoutX="50.0" layoutY="390.0" style="-fx-font-size: 14px; -fx-text-fill: white;" text="Workers:" />
       <ComboBox fx:id="MSRworkers" layoutX="120.0" layoutY="386.0" prefWidth="240.0" style="-fx-background-radius: 5; -fx-border-color: #00f2fe;" />
-
-      <!-- Image Preview -->
       <Label layoutX="451.0" layoutY="77.0" style="-fx-font-size: 14px; -fx-text-fill: white;" text="Preview Image:" />
       <ImageView fx:id="MSRdesign" fitHeight="120.0" fitWidth="120.0" layoutX="447.0" layoutY="101.0" style="-fx-border-color: white; -fx-border-width: 2; -fx-border-radius: 5;" />
       <Button layoutX="451.0" layoutY="230.0" onAction="#MSRbtnupload" style="-fx-background-color: black; -fx-text-fill: white; -fx-font-size: 13px;" text="Upload Image" />
-
-      <!-- Action Buttons -->
       <Button layoutX="100.0" layoutY="500.0" onAction="#MSRbtnnnew" style="-fx-background-color: black; -fx-text-fill: white; -fx-font-size: 14px; -fx-border-radius: 5;" text="New" />
       <Button layoutX="180.0" layoutY="500.0" onAction="#MSRbtnsave" style="-fx-background-color: black; -fx-text-fill: white; -fx-font-size: 14px; -fx-border-radius: 5;" text="Save" />
       <Button layoutX="260.0" layoutY="500.0" onAction="#MSRbtnnupdate" style="-fx-background-color: black; -fx-text-fill: white; -fx-font-size: 14px; -fx-border-radius: 5;" text="Update" />
